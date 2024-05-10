@@ -1,5 +1,5 @@
 # relaytools
-*2024-04-25 (1st draft) still needs some clean up
+*2024-04-25 (1st draft) still needs some clean up (test)
 
 ### This guide will help beginners setup a Nostr relay vending machine. 
 
