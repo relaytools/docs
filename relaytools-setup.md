@@ -1,7 +1,9 @@
-# relaytools
-*2024-04-25 (1st draft) still needs some clean up (test)
 
-### This guide will help beginners setup a Nostr relay vending machine. 
+# relaytools
+*2024-04-25 (1st draft) still needs some clean up
+*2024-05-10 (2nd draft) attempting more clean up
+
+### This guide aims to help beginners setup a Nostr relay vending machine.
 
 **Why would I want this?**
 If you want to on-the-fly be able to create custom Nostr relays for yourself, friends, or strangers for free or for sats! 
@@ -13,41 +15,33 @@ If this is the case, let's get started with relaytools!
  - Wildcard DNS (noip.com)
  - Ports 80 and 443 opened for your server
 
-**Methodology:**
- - Linux
-	 - systemd/nspawn
-		 - machine:mysql
-		 - machine:relaycreator
-		 - machine:strfry
-		 - machine:haproxy
- - web interface on port 443
-
 ##  Linux server or Virtual Machine (ubuntu server)
-*Skip this section if you already have a linux on the cloud. 
+*Skip this section if you already have a Linux in the cloud.  - Jump to [Let's now set up relaytools](https://gist.github.com/SpiralCrunch/ec24f1f460bfd0b0870564fa07d0aaea#lets-now-set-up-relaytools).
 
-Jump to [Let's now set up relaytools](https://gist.github.com/SpiralCrunch/ec24f1f460bfd0b0870564fa07d0aaea#lets-now-set-up-relaytools).
+A Linux server system is needed to install relaytools, we will use Ubuntu server in this guide.
 
-We needs a Linux system to install relaytools, we will use Ubuntu server within this setup guide.
->This could be an old desktop or laptop you no longer use and want to repurpose, or one of the little multi-core sandwich sized computers.
+- We will use a VirtualBox VM with a single CPU and 4GB of RAM; however, this could be an old desktop or laptop you no longer use and want to repurpose, or one of the small, multi-core, sandwich-sized computers.
 
-I will use a VirtualBox VM with a single CPU and 4GBs of RAM
+> Note: Installing VirtualBox is outside the scope of the guide. This
+> overview might be helpful is you need it:
+> https://www.nakivo.com/blog/use-virtualbox-quick-overview/
 
 **Let's make the VM first:**
-- Make a new VM within VirutalBox called "relaytools" or what ever you like.
- - We will be using ubuntu-22.04.4-live-server-amd64.iso as this is current at time or writing with 4096MBs of virtual RAM
-- The dynamically sized disk will be 1000GBs (should this be more?)
+- Make a new VM within VirtualBox called "relaytools" or what ever you like.
+-  We will be using [ubuntu-22.04.4-live-server-amd64.iso](https://releases.ubuntu.com/noble/ubuntu-24.04-live-server-amd64.iso)  as this is current at time of writing with 4096MBs of virtual RAM
+-  The dynamically sized disk will be 1000GBs
 - Set the Network to "Bridged Adapter" This will allow us an IP served from our LAN router
-  - Goto Storage and attach the Ubuntu ISO to the virtual Optical Drive
-  - Start the VM now and install the base OS (~10 minutes)
-    - Let's choose:
-      - "Ubuntu Server"
-      - DHCP showed a local IP in the proper range for me 192.168.2.70
-      - I removed the "x" from set up as LVM group
-      - setup your name, server name, username and password
-      - Put an "x" in to enable Install OpenSSH server
-      - continue with the install...
+- Goto Storage and attach the Ubuntu ISO to the virtual Optical Drive
+- Start the VM now and install the base OS (~10 minutes)
+	- Let's choose:
+	    - "Ubuntu Server"
+	    - DHCP showed a local IP in the proper range; for myself I'll choose 192.168.2.70
+	    - Let's removed the "x" from set up as LVM group
+	    - Setup your name, server name, username and password
+	    - Put an "x" in to enable Install OpenSSH server
+	    - continue with the install...
       (~10 minutes)
-      - Reboot and remove virtual optical disk
+      - Remove virtual optical disk and reboot
         
 **Boot into the VM:**
   Login and get the IP to allow access via SSH
@@ -64,7 +58,7 @@ It shows my LAN IP is 192.168.2.70
 ## -   Wildcard DNS ([noip.com](http://noip.com/))
 This was the only cost for me. I have used noip.com's free DNS for years but needed to pay for at least one wildcard service to use relaytools. I purchased "Enhanced Dynamic Dns" for 1 year with coupon code: *REFER20* for $15.99 USD*
 
-This allows me to have ***.nostr-hub.ddns.net** meaning I have many, many subdomains such as follows:
+This allows for ***.nostr-hub.ddns.net**, meaning I have many, many subdomains, such as the following:
 
  - wss://jacks-relay.nostr-hub.ddns.net
  - wss://jills-relay.nostr-hub.ddns.net
@@ -113,7 +107,9 @@ Launch the noip-duc app to connect to noip and start the WAN IP discovery for no
     [2024-04-22T03:47:24Z INFO  noip_duc] update succeeded; ip=146.70.112.84, changed=false
     [2024-04-22T03:47:24Z INFO  noip_duc] checking ip again in 5m
 		
-This is now reporting your WAN or web facing IP address to [noip.com](http://noip.com/) so they can direct DNS queries to your server.
+noip-duc is now reporting your WAN or web facing IP address to [noip.com](http://noip.com/) so they can direct DNS queries to your server.
+
+**(pending) Need steps to setup this up as a service to autostart after reboot**
 
 ## Let's now set up relaytools
 **Switch to root**
@@ -130,7 +126,7 @@ This is now reporting your WAN or web facing IP address to [noip.com](http://noi
 
     ./prereqs.sh
 
-**builds all the images (this takes a while ~29 minutes)**
+**builds all the images (this takes a while ~15-30 minutes)**
 
     ./build
 
@@ -148,9 +144,23 @@ Every router has a section that allows you to do port forwarding for IPs that yo
     touch nothing-to-see-here.txt
     sudo python3 -m http.server 80
 
-If that does not work try:
+If the domain and subdomains are working you will be able to test as follows:
+http://spirals-archive.ddns.net/
+http://what.spirals-archive.ddns.net/
+
+https://image.nostr.build/bff870c4815c74ed1ce0ee7c968b94bffa983e3f50f8e3d57b84b78a8bce261f.png
+
+https://image.nostr.build/04ea7620e7a3853798bd4beefa4d2b2f1a10962ad241ae32cda1fabc5682584f.png
+
+Now test port 443 is accessible:
 
     sudo python3 -m http.server 443
+
+https://image.nostr.build/3bcfb170e629eb8cf1fb1fdf8fdf0bdb32174fad77685cef4b0d20c0fefd5fbb.png
+
+https://image.nostr.build/2d9d47674e230dd1a0a0c71bbae9b6c58ba9ff10713bab1f6b84d73afba54ece.png
+
+
 
 **Test internally with the IP in a browser on the same network**
 
@@ -204,90 +214,137 @@ Expected output
          * Donating to EFF:                    https://eff.org/donate-le
         - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+**You should now have a working relaytools**
+https://image.nostr.build/d6671bc42f234c2c2c0646366a39bd9749dc5c40084c90f7ef729707a9c79d78.png
+
+
+Subdomain
+https://image.nostr.build/ff4fc6f743f734f0c11a3703fa3d4e1c865d2762e51a5dbdd36e45fd90760ad2.png
+
+
 https://nostr-hub.ddns.net/
 https://relay.nostr-hub.ddns.net/
 https://nostr-hub.ddns.net/curator?
 
+## Manually create the Let's Encrypt certs
 After we have created a new subdomain relay via the web interface we need to manually create the Let's Encrypt certs needed.
 
+Switch to root
+
+    sudo -i
+
     machinectl terminate haproxy
+
 Login to keys-certs-manager machine, sort of, and let's make the certs
 
-    systemd-nspawn -D /var/lib/machines/keys-certs-manager -U --machine keys-certs-manager
+### How to enable the subdomain
+Let's now access the bash interface for the keys-certs-manager machine
 
->yo!  yeah that one, it doesn't probably have the full system init.. so there isn't the classic login like the other ones, to get into the bash you just systemd-nspawn -M keys-certs-manager /bin/bash (or other command)
-
-
-## How to enable the subdomain
     systemd-nspawn -M keys-certs-manager /bin/bash
 
+We need to create the cert now:
 **Note:** Don't forget to replace my domain names with your domain name.
-```certbot certonly --config-dir="/srv/haproxy/certs" --work-dir="/srv/haproxy/certs" --logs-dir="/srv/haproxy/certs" --expand -d "nostr-hub.ddns.net" -d "relay.nostr-hub.ddns.net" --agree-tos --register-unsafely-without-email --standalone --preferred-challenges http --non-interactive```
 
-```certbot certonly --config-dir="/srv/haproxy/certs" --work-dir="/srv/haproxy/certs" --logs-dir="/srv/haproxy/certs" -d "relay.nostr-hub.ddns.net" --expand --agree-tos --register-unsafely-without-email --standalone --preferred-challenges http --non-interactive```
 
-```certbot certonly --config-dir="/srv/haproxy/certs" --work-dir="/srv/haproxy/certs" --logs-dir="/srv/haproxy/certs" -d "relay.nostr-hub.ddns.net" --expand --agree-tos --register-unsafely-without-email --standalone --preferred-challenges http --non-interactive```
+```certbot certonly --config-dir="/srv/haproxy/certs" --work-dir="/srv/haproxy/certs" --logs-dir="/srv/haproxy/certs" -d "tutorial.spirals-archive.ddns.net" --expand --agree-tos --register-unsafely-without-email --standalone --preferred-challenges http --non-interactive```
 
 **Output**
 ```
-root@keys-certs-manager / certbot certonly --config-dir="/srv/haproxy/certs" --work-dir="/srv/haproxy/certs" --logs-dir="/srv/haproxy/certs" -d "nostr-hub.ddns.net" -d "relay.nostr-hub.ddns.net" --agree-tos --register-unsafely-without-email --standalone --preferred-challenges http --non-interactive
-      Saving debug log to /srv/haproxy/certs/letsencrypt.log
-      Missing command line flag or config entry for this setting:
-      You have an existing certificate that contains a portion of the domains you requested (ref: /srv/haproxy/certs/renewal/nostr-hub.ddns.net.conf)
+Saving debug log to /srv/haproxy/certs/letsencrypt.log
+Requesting a certificate for tutorial.spirals-archive.ddns.net
 
-  It contains these names: nostr-hub.ddns.net
+Successfully received certificate.
+Certificate is saved at: /srv/haproxy/certs/live/tutorial.spirals-archive.ddns.net/fullchain.pem
+Key is saved at:         /srv/haproxy/certs/live/tutorial.spirals-archive.ddns.net/privkey.pem
+This certificate expires on 2024-08-08.
+These files will be updated when the certificate renews.
+Certbot has set up a scheduled task to automatically renew this certificate in the background.
 
-  You requested these names for the new certificate: nostr-hub.ddns.net, relay.nostr-hub.ddns.net.
-
-  Do you want to expand and replace this existing certificate with the new certificate?
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+If you like Certbot, please consider supporting our work by:
+ * Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+ * Donating to EFF:                    https://eff.org/donate-le
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ```
-  (You can set this with the --expand flag)
-  Ask for help or search for solutions at https://community.letsencrypt.org. See the logfile /srv/haproxy/certs/letsencrypt.log or re-run Certbot with -v for more details.
-  root@keys-certs-manager / certbot certonly --config-dir="/srv/haproxy/certs" --work-dir="/srv/haproxy/certs" --logs-dir="/srv/haproxy/certs" --expand -d "relay.nostr-hub.ddns.net" --agree-tos --register-unsafely-without-email --standalone --preferred-challenges http --non-interactive
-  Saving debug log to /srv/haproxy/certs/letsencrypt.log
-  Requesting a certificate for relay.nostr-hub.ddns.net
 
-  Successfully received certificate.
-  Certificate is saved at: /srv/haproxy/certs/live/relay.nostr-hub.ddns.net/fullchain.pem
-  Key is saved at:         /srv/haproxy/certs/live/relay.nostr-hub.ddns.net/privkey.pem
-  This certificate expires on 2024-07-22.
-  These files will be updated when the certificate renews.
-  Certbot has set up a scheduled task to automatically renew this certificate in the background.
+**copy the pem files to the correct locations**
+```
+cd /srv/haproxy/certs/live/
+ls -ltr
+```
+*This should show folders that have the same names as your domain and subdomains
 
-  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  If you like Certbot, please consider supporting our work by:
-   * Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
-   * Donating to EFF:                    https://eff.org/donate-le
-  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Mine are as follows:
+```
+drwxr-xr-x 2 root root 4096 May 10 23:26 spirals-archive.ddns.net
+drwxr-xr-x 2 root root 4096 May 10 23:35 tutorial.spirals-archive.ddns.net
+```
+spirals-archive.ddns.net
+tutorial.spirals-archive.ddns.net
 
+*I need to take these folder names and substitute within the following:
 
-cat /srv/haproxy/certs/live/nostr-hub.ddns.net/fullchain.pem /srv/haproxy/certs/live/nostr-hub.ddns.net/privkey.pem > /srv/haproxy/certs/bundle.pem
+## Create bundle.pem for main domain
+cat /srv/haproxy/certs/live/**spirals-archive.ddns.net**/fullchain.pem /srv/haproxy/certs/live/**spirals-archive.ddns.net**/privkey.pem > /srv/haproxy/certs/bundle.pem
 
-cat /srv/haproxy/certs/live/relay.nostr-hub.ddns.net/fullchain.pem /srv/haproxy/certs/live/relay.nostr-hub.ddns.net/privkey.pem >> /srv/haproxy/certs/bundle.pem
 chmod 0600 /srv/haproxy/certs/bundle.pem
 
+```cat /srv/haproxy/certs/live/spirals-archive.ddns.net/fullchain.pem /srv/haproxy/certs/live/spirals-archive.ddns.net/privkey.pem > /srv/haproxy/certs/bundle.pem```
 
-
-
-# Create bundle.pem for main domain
-cat /srv/haproxy/certs/live/nostr-hub.ddns.net/fullchain.pem /srv/haproxy/certs/live/nostr-hub.ddns.net/privkey.pem > /srv/haproxy/certs/bundle.pem
-chmod 0600 /srv/haproxy/certs/bundle.pem
-
-# Append to bundle.pem the subdomain(s)
-```cat /srv/haproxy/certs/live/relay.nostr-hub.ddns.net/fullchain.pem /srv/haproxy/certs/live/relay.nostr-hub.ddns.net/privkey.pem >> /srv/haproxy/certs/bundle.pem```
+## Append to bundle.pem the subdomain(s)
+```cat /srv/haproxy/certs/live/tutorial.spirals-archive.ddns.net/fullchain.pem /srv/haproxy/certs/live/tutorial.spirals-archive.ddns.net/privkey.pem >> /srv/haproxy/certs/bundle.pem```
 
 ```chmod 0600 /srv/haproxy/certs/bundle.pem```
 
+Let's exit out of the haproxy container 
+
+	exit
+Expected output:
+
+	Container keys-certs-manager exited successfully.
+
+Now that we are back to the host Linux we need to enable all the container to auto start on reboot now:	
+```
+machinectl enable mysql
+machinectl enable strfry
+machinectl enable relaycreator
+machinectl enable haproxy
+```
+Expected output:
+
+```
+Created symlink /etc/systemd/system/machines.target.wants/systemd-nspawn@mysql.service → /usr/lib/systemd/system/systemd-nspawn@.service.
+Created symlink /etc/systemd/system/machines.target.wants/systemd-nspawn@strfry.service → /usr/lib/systemd/system/systemd-nspawn@.service.
+Created symlink /etc/systemd/system/machines.target.wants/systemd-nspawn@relaycreator.service → /usr/lib/systemd/system/systemd-nspawn@.service.
+Created symlink /etc/systemd/system/machines.target.wants/systemd-nspawn@haproxy.service → /usr/lib/systemd/system/systemd-nspawn@.service.
+```
+Now we reboot the host system
+
+	reboot
+
+
+
+https://image.nostr.build/c008a66424a27b0e43b245551db195a3c469c4e4adbc3b0efe61c75e58f0d850.png
+
+https://image.nostr.build/dfb0ad37b791f73398d8b0029226faf52c2d688284e73b275bd7e20ee3e58218.png
+
+# Congratulation! You now have a working relay made with relaytools!
+**Thanks to cloud fodder the creator behind relay.tools**
+> Written with [StackEdit](https://stackedit.io/).
+
+## The following info likely needs removing...
+
+machinectl terminate haproxy
 
 ## machinectl commands
 
-    machinectl list-images
-    machinectl list
-    
-    machinectl enable mysql
-    machinectl enable strfry
-    machinectl enable relaycreator
-    machinectl enable haproxy
+machinectl list-images
+machinectl list
+
+machinectl enable mysql
+machinectl enable strfry
+machinectl enable relaycreator
+machinectl enable haproxy
 
 
 **Set the hostname of your server (optional)**
@@ -315,7 +372,7 @@ Username/Password: `root/creator`
 
     journalctl -fn
 
-## Remove or note?
+## Remove or note? 
 This was filed in the repo
 
     Seems this was missing ...
@@ -324,6 +381,37 @@ This was filed in the repo
     go build -x
     cp spamblaster /usr/local/bin
 
-***Thanks to cloud fodder the creator behind relay.tools**
+**Methodology:**
+ - Linux
+	 - systemd/nspawn
+		 - machine:mysql
+		 - machine:relaycreator
+		 - machine:strfry
+		 - machine:haproxy
+ - web interface on port 443
 
+    systemd-nspawn -D /var/lib/machines/keys-certs-manager -U --machine keys-certs-manager
+
+>yo!  yeah that one, it doesn't probably have the full system init.. so there isn't the classic login like the other ones, to get into the bash you just systemd-nspawn -M keys-certs-manager /bin/bash (or other command)
+
+
+
+```certbot certonly --config-dir="/srv/haproxy/certs" --work-dir="/srv/haproxy/certs" --logs-dir="/srv/haproxy/certs" --expand -d "nostr-hub.ddns.net" -d "relay.nostr-hub.ddns.net" --agree-tos --register-unsafely-without-email --standalone --preferred-challenges http --non-interactive```
+
+
+
+Navigate into that folder:
+```
+cd spirals-archive.ddns.net
+ls -altr
+
+cat /srv/haproxy/certs/live/nostr-hub.ddns.net/fullchain.pem /srv/haproxy/certs/live/nostr-hub.ddns.net/privkey.pem > /srv/haproxy/certs/bundle.pem
+```
+cat /srv/haproxy/certs/live/relay.nostr-hub.ddns.net/fullchain.pem /srv/haproxy/certs/live/relay.nostr-hub.ddns.net/privkey.pem >> /srv/haproxy/certs/bundle.pem
+chmod 0600 /srv/haproxy/certs/bundle.pem
+
+
+
+
+**Thanks to cloud fodder the creator behind relay.tools**
 > Written with [StackEdit](https://stackedit.io/).
