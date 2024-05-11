@@ -1,11 +1,13 @@
 
 # relaytools
 *2024-04-25 (1st draft) still needs some clean up
+
 *2024-05-10 (2nd draft) attempting more clean up
 
 ### This guide aims to help beginners setup a Nostr relay vending machine.
 
 **Why would I want this?**
+
 If you want to on-the-fly be able to create custom Nostr relays for yourself, friends, or strangers for free or for sats! 
 
 If this is the case, let's get started with relaytools!
@@ -16,7 +18,7 @@ If this is the case, let's get started with relaytools!
  - Ports 80 and 443 opened for your server
 
 ##  Linux server or Virtual Machine (ubuntu server)
-*Skip this section if you already have a Linux in the cloud.  - Jump to [Let's now set up relaytools](https://gist.github.com/SpiralCrunch/ec24f1f460bfd0b0870564fa07d0aaea#lets-now-set-up-relaytools).
+*Skip this section if you already have a Linux in the cloud.  - Jump to [Let's now set up relaytools](#lets-now-set-up-relaytools).
 
 A Linux server system is needed to install relaytools, we will use Ubuntu server in this guide.
 
@@ -67,16 +69,18 @@ This allows for ***.nostr-hub.ddns.net**, meaning I have many, many subdomains, 
  
 ****Not bad for $1.33/month***
 
-Our goal is to setup `*.nostr-hub.ddns.net` within noip.com's control panel
-(pending)
+(pending) Our goal is to setup `*.nostr-hub.ddns.net` within noip.com's control panel
 
-**Now we have to get your DNS/domain name setup**
-(pending)
+
+**(pending)Now we have to get your DNS/domain name setup**
+
 
 ## SSH into your server and do the following
+
 You will need your `username` and `ip address` to SSH into your server. Here is my example.
 
     ssh spiral@192.168.2.70
+    
 Enter your password and login
 
 **As a normal user**
@@ -134,6 +138,7 @@ noip-duc is now reporting your WAN or web facing IP address to [noip.com](http:/
 installed correctly.
 
 ## Setup port forwarding for ports 80 and 443 within our router and test via LAN and WAN
+
 Every router has a section that allows you to do port forwarding for IPs that your router assigns to the devices attached. Be sure to allow for your server IP both port 80 and 443
 ****How to actually do this is outside of the scope of this instruction set***
 
@@ -145,7 +150,9 @@ Every router has a section that allows you to do port forwarding for IPs that yo
     sudo python3 -m http.server 80
 
 If the domain and subdomains are working you will be able to test as follows:
+
 http://spirals-archive.ddns.net/
+
 http://what.spirals-archive.ddns.net/
 
 ![main domain working](https://image.nostr.build/bff870c4815c74ed1ce0ee7c968b94bffa983e3f50f8e3d57b84b78a8bce261f.png)
@@ -172,13 +179,17 @@ Expected output:
     nothing-to-see-here.txt
 
 The same output should be shown for the external IP
-  http://146.70.112.84/
-  http://146.70.112.84:443/
-  http://nostr-hub.ddns.net:443/
 
+  http://146.70.112.84/
+  
+  http://146.70.112.84:443/
+  
+  http://nostr-hub.ddns.net:443/
+  
 If that is all working, let's proceed...
 
 # Let's switch back to root to finish up the setup of relaytools
+
 Switch to root
 
     sudo -i
@@ -215,15 +226,19 @@ Expected output
         - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 **You should now have a working relaytools**
+
 ![Working relaytools](https://image.nostr.build/d6671bc42f234c2c2c0646366a39bd9749dc5c40084c90f7ef729707a9c79d78.png)
 
 
 Making a subdomain relay...
+
 ![making a subdomain relay](https://image.nostr.build/ff4fc6f743f734f0c11a3703fa3d4e1c865d2762e51a5dbdd36e45fd90760ad2.png)
 
 
 https://nostr-hub.ddns.net/
+
 https://relay.nostr-hub.ddns.net/
+
 https://nostr-hub.ddns.net/curator?
 
 ## Manually create the Let's Encrypt certs
@@ -238,6 +253,7 @@ Switch to root
 Login to keys-certs-manager machine, sort of, and let's make the certs
 
 ### How to enable the subdomain
+
 Let's now access the bash interface for the keys-certs-manager machine
 
     systemd-nspawn -M keys-certs-manager /bin/bash
@@ -280,11 +296,13 @@ drwxr-xr-x 2 root root 4096 May 10 23:26 spirals-archive.ddns.net
 drwxr-xr-x 2 root root 4096 May 10 23:35 tutorial.spirals-archive.ddns.net
 ```
 spirals-archive.ddns.net
+
 tutorial.spirals-archive.ddns.net
 
 *I need to take these folder names and substitute within the following:
 
 ## Create bundle.pem for main domain
+
 cat /srv/haproxy/certs/live/**spirals-archive.ddns.net**/fullchain.pem /srv/haproxy/certs/live/**spirals-archive.ddns.net**/privkey.pem > /srv/haproxy/certs/bundle.pem
 
 chmod 0600 /srv/haproxy/certs/bundle.pem
@@ -292,6 +310,7 @@ chmod 0600 /srv/haproxy/certs/bundle.pem
 ```cat /srv/haproxy/certs/live/spirals-archive.ddns.net/fullchain.pem /srv/haproxy/certs/live/spirals-archive.ddns.net/privkey.pem > /srv/haproxy/certs/bundle.pem```
 
 ## Append to bundle.pem the subdomain(s)
+
 ```cat /srv/haproxy/certs/live/tutorial.spirals-archive.ddns.net/fullchain.pem /srv/haproxy/certs/live/tutorial.spirals-archive.ddns.net/privkey.pem >> /srv/haproxy/certs/bundle.pem```
 
 ```chmod 0600 /srv/haproxy/certs/bundle.pem```
@@ -304,6 +323,7 @@ Expected output:
 	Container keys-certs-manager exited successfully.
 
 Now that we are back to the host Linux we need to enable all the container to auto start on reboot now:	
+
 ```
 machinectl enable mysql
 machinectl enable strfry
@@ -318,6 +338,7 @@ Created symlink /etc/systemd/system/machines.target.wants/systemd-nspawn@strfry.
 Created symlink /etc/systemd/system/machines.target.wants/systemd-nspawn@relaycreator.service → /usr/lib/systemd/system/systemd-nspawn@.service.
 Created symlink /etc/systemd/system/machines.target.wants/systemd-nspawn@haproxy.service → /usr/lib/systemd/system/systemd-nspawn@.service.
 ```
+
 Now we reboot the host system
 
 	reboot
@@ -327,7 +348,9 @@ Now we reboot the host system
 ![certs fixed and tested](https://image.nostr.build/c008a66424a27b0e43b245551db195a3c469c4e4adbc3b0efe61c75e58f0d850.png)
 
 ![Test posts showing up on the relay](https://image.nostr.build/dfb0ad37b791f73398d8b0029226faf52c2d688284e73b275bd7e20ee3e58218.png)
+
 # Congratulation! You now have a working relay made with relaytools!
+
 **Thanks to cloud fodder the creator behind relay.tools**
 > Written with [StackEdit](https://stackedit.io/).
 
