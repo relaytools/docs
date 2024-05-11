@@ -148,17 +148,17 @@ If the domain and subdomains are working you will be able to test as follows:
 http://spirals-archive.ddns.net/
 http://what.spirals-archive.ddns.net/
 
-https://image.nostr.build/bff870c4815c74ed1ce0ee7c968b94bffa983e3f50f8e3d57b84b78a8bce261f.png
+![main domain working](https://image.nostr.build/bff870c4815c74ed1ce0ee7c968b94bffa983e3f50f8e3d57b84b78a8bce261f.png)
 
-https://image.nostr.build/04ea7620e7a3853798bd4beefa4d2b2f1a10962ad241ae32cda1fabc5682584f.png
+![subdomain working](https://image.nostr.build/04ea7620e7a3853798bd4beefa4d2b2f1a10962ad241ae32cda1fabc5682584f.png)
 
 Now test port 443 is accessible:
 
     sudo python3 -m http.server 443
 
-https://image.nostr.build/3bcfb170e629eb8cf1fb1fdf8fdf0bdb32174fad77685cef4b0d20c0fefd5fbb.png
+![Testing port 443](https://image.nostr.build/3bcfb170e629eb8cf1fb1fdf8fdf0bdb32174fad77685cef4b0d20c0fefd5fbb.png)
 
-https://image.nostr.build/2d9d47674e230dd1a0a0c71bbae9b6c58ba9ff10713bab1f6b84d73afba54ece.png
+![Testing port 443 on subdomain](https://image.nostr.build/2d9d47674e230dd1a0a0c71bbae9b6c58ba9ff10713bab1f6b84d73afba54ece.png)
 
 
 
@@ -215,11 +215,11 @@ Expected output
         - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 **You should now have a working relaytools**
-https://image.nostr.build/d6671bc42f234c2c2c0646366a39bd9749dc5c40084c90f7ef729707a9c79d78.png
+![Working relaytools](https://image.nostr.build/d6671bc42f234c2c2c0646366a39bd9749dc5c40084c90f7ef729707a9c79d78.png)
 
 
-Subdomain
-https://image.nostr.build/ff4fc6f743f734f0c11a3703fa3d4e1c865d2762e51a5dbdd36e45fd90760ad2.png
+Making a subdomain relay...
+![making a subdomain relay](https://image.nostr.build/ff4fc6f743f734f0c11a3703fa3d4e1c865d2762e51a5dbdd36e45fd90760ad2.png)
 
 
 https://nostr-hub.ddns.net/
@@ -324,10 +324,9 @@ Now we reboot the host system
 
 
 
-https://image.nostr.build/c008a66424a27b0e43b245551db195a3c469c4e4adbc3b0efe61c75e58f0d850.png
+![certs fixed and tested](https://image.nostr.build/c008a66424a27b0e43b245551db195a3c469c4e4adbc3b0efe61c75e58f0d850.png)
 
-https://image.nostr.build/dfb0ad37b791f73398d8b0029226faf52c2d688284e73b275bd7e20ee3e58218.png
-
+![Test posts showing up on the relay](https://image.nostr.build/dfb0ad37b791f73398d8b0029226faf52c2d688284e73b275bd7e20ee3e58218.png)
 # Congratulation! You now have a working relay made with relaytools!
 **Thanks to cloud fodder the creator behind relay.tools**
 > Written with [StackEdit](https://stackedit.io/).
