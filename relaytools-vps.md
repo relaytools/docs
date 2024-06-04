@@ -10,41 +10,67 @@ What you will need to begin:
 - Before beginning the release upgrade, it’s safest to update to the latest versions of all packages _for the current release_.
 - Begin by updating the package list:
 
->`sudo apt update`
+```
+sudo apt update
+```
  
 - Next, upgrade installed packages to their latest available versions:
 
->`sudo apt upgrade`
+```
+sudo apt upgrade
+```
 
->`sudo do-release-upgrade`
+```
+sudo do-release-upgrade
+```
+
+# Installation
 
 - Install Git and clone the repository:
 
->`sudo apt install git && git clone https://github.com/relaytools/relay-tools-images.git`
+```
+sudo apt install git && git clone https://github.com/relaytools/relay-tools-images.git
+```
 
 - Navigate into the 'machines' directory:
 
->`cd /root/relay-tools-images/machines && ls -altr`
+```
+cd /root/relay-tools-images/machines && ls -altr
+```
 
 - Configure requirements:
 
->`./prereqs.sh `
+```
+./prereqs.sh
+```
 
 - Build it:
 
->`./build`
+```
+./build
+```
 
-*This is a good time to grab some coffee.* ☕
+- *This is a good time to grab some coffee.* ☕
 
-**NOTE: Be sure to change `EXAMPLE.DOMAIN` to your own domain:**
+- **NOTE: Be sure to change `EXAMPLE.DOMAIN` to your own domain:**
 
->`export MYDOMAIN=EXAMPLE.DOMAIN`
+# Configuration
 
->`./configure.sh`
+```
+export MYDOMAIN=EXAMPLE.DOMAIN
+```
 
->`machinectl enable mysql && machinectl enable strfry && machinectl enable relaycreator && machinectl enable haproxy`
+```
+./configure.sh
+```
 
->`reboot`
+```
+machinectl enable mysql && machinectl enable strfry && machinectl enable relaycreator && machinectl enable haproxy
+```
+
+```
+reboot
+```
 
 # Creating a relay
 
@@ -68,22 +94,36 @@ What you will need to begin:
   <img src="https://github.com/TekkadanPlays/docs/assets/93434084/ddd1906f-6757-429b-9757-a0b73299fe1c">
 </p>
 
-**Return to your terminal:**
+- **Return to your terminal:**
 
->`cd /root/relay-tools-images/machines`
+```
+cd /root/relay-tools-images/machines
+```
 
->`machinectl terminate haproxy`
+```
+machinectl terminate haproxy
+```
 
->`systemd-nspawn -M keys-certs-manager /bin/bash`
+```
+systemd-nspawn -M keys-certs-manager /bin/bash
+```
 
-**NOTE: Be sure to change EACH `EXAMPLE.DOMAIN` to your own domain:**
+- **NOTE: Be sure to change _EACH `EXAMPLE.DOMAIN`_ to your own domain:**
 
->`certbot certonly --config-dir="/srv/haproxy/certs" --work-dir="/srv/haproxy/certs" --logs-dir="/srv/haproxy/certs" --expand -d "EXAMPLE.DOMAIN" -d "RELAY.EXAMPLE.DOMAIN" --agree-tos --register-unsafely-without-email --standalone --preferred-challenges http --non-interactive`
+```
+certbot certonly --config-dir="/srv/haproxy/certs" --work-dir="/srv/haproxy/certs" --logs-dir="/srv/haproxy/certs" --expand -d "EXAMPLE.DOMAIN" -d "RELAY.EXAMPLE.DOMAIN" --agree-tos --register-unsafely-without-email --standalone --preferred-challenges http --non-interactive
+```
 
->`cat /srv/haproxy/certs/live/EXAMPLE.DOMAIN/fullchain.pem /srv/haproxy/certs/live/EXAMPLE.DOMAIN/privkey.pem > /srv/haproxy/certs/bundle.pem`
+```
+cat /srv/haproxy/certs/live/EXAMPLE.DOMAIN/fullchain.pem /srv/haproxy/certs/live/EXAMPLE.DOMAIN/privkey.pem > /srv/haproxy/certs/bundle.pem
+```
 
->`exit`
+```
+exit
+```
 
->`reboot`
+```
+reboot
+```
 
-Enjoy!
+- Enjoy!
