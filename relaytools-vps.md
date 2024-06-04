@@ -1,51 +1,29 @@
-# VPS Setup Instructions
+# VPS Installation
 
-[Update Currently Installed Packages:](https://www.digitalocean.com/community/tutorials/how-to-upgrade-to-ubuntu-22-04-jammy-jellyfish#step-2-updating-currently-installed-packages)
-
-- Before beginning the release upgrade, it’s safest to update to the latest versions of all packages _for the current release_.
-- Begin by updating the package list:
-
-```
-sudo apt update
-```
- 
-- Next, upgrade installed packages to their latest available versions:
-
-```
-sudo apt upgrade
-```
-
-```
-sudo do-release-upgrade
-```
-
-# Installation
-
-- Install Git and clone the repository:
+- *Install Git and clone the repository:*
 
 ```
 sudo apt install git && git clone https://github.com/relaytools/relay-tools-images.git
 ```
 
-- Navigate into the 'machines' directory:
+- *Navigate into the 'machines' directory:*
 
 ```
-cd /root/relay-tools-images/machines && ls -altr
+cd /root/relay-tools-images/machines
 ```
 
-- Configure requirements:
+- *Configure requirements:*
 
 ```
 ./prereqs.sh
 ```
 
-- Build it:
+- *Build it:*
 
 ```
 ./build
 ```
-
-- *This is a good time to grab some coffee.* ☕
+### This is a good time to grab some coffee. ☕
 
 # Configuration
 
