@@ -1,10 +1,5 @@
 # VPS Setup Instructions
 
-What you will need to begin:
-- [Fresh install of Ubuntu on a VPS](https://www.digitalocean.com/community/tutorials/how-to-upgrade-to-ubuntu-22-04-jammy-jellyfish)
-- [Configure your SSH keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-ubuntu-22-04)
-
-
 [Update Currently Installed Packages:](https://www.digitalocean.com/community/tutorials/how-to-upgrade-to-ubuntu-22-04-jammy-jellyfish#step-2-updating-currently-installed-packages)
 
 - Before beginning the release upgrade, it’s safest to update to the latest versions of all packages _for the current release_.
