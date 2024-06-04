@@ -52,9 +52,9 @@ cd /root/relay-tools-images/machines && ls -altr
 
 - *This is a good time to grab some coffee.* ☕
 
-- **NOTE: Be sure to change `EXAMPLE.DOMAIN` to your own domain:**
-
 # Configuration
+
+- **NOTE: Be sure to change `EXAMPLE.DOMAIN` to your own domain:**
 
 ```
 export MYDOMAIN=EXAMPLE.DOMAIN
