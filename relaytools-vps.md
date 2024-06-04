@@ -47,7 +47,7 @@ reboot
 
 # Creating a relay
 
-**Now, navigate to your domain in a browser.**
+- **Now, navigate to your domain in a browser.**
 
 <p align="center">
  Sign in:
@@ -111,4 +111,20 @@ exit
 reboot
 ```
 
-- Enjoy!
+### Enjoy!
+
+# Notes
+
+- *To disallow creation of relays:*
+
+```
+cd /srv/relaycreator/ && ls -altr
+```
+
+```
+sudo nano .env
+```
+
+- **Change `PAYMENTS_ENABLED=false` to `true`**
+
+
