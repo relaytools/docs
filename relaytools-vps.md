@@ -48,14 +48,22 @@ What you will need to begin:
 
 # Creating a relay
 
-- **Now, navigate to your domain in a browser.**
+**Now, navigate to your domain in a browser.**
+
+- Sign in:
 
 <p align="center">
   <img src="https://github.com/TekkadanPlays/docs/assets/93434084/826bbd35-1e58-4cc1-ae01-a0f8e0d329ff">
 </p>
+
+- Create relay:
+
 <p align="center">
   <img src="https://github.com/TekkadanPlays/docs/assets/93434084/75e993d9-b3ac-490f-82f3-fee785392e96">
 </p>
+
+- Let's name our example 'relay':
+
 <p align="center">
   <img src="https://github.com/TekkadanPlays/docs/assets/93434084/ddd1906f-6757-429b-9757-a0b73299fe1c">
 </p>
