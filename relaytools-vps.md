@@ -114,6 +114,8 @@ systemd-nspawn -M keys-certs-manager /bin/bash
 certbot certonly --config-dir="/srv/haproxy/certs" --work-dir="/srv/haproxy/certs" --logs-dir="/srv/haproxy/certs" --expand -d "EXAMPLE.DOMAIN" -d "RELAY.EXAMPLE.DOMAIN" --agree-tos --register-unsafely-without-email --standalone --preferred-challenges http --non-interactive
 ```
 
+- **NOTE: Be sure to change _EACH `EXAMPLE.DOMAIN`_ to your own domain:**
+
 ```
 cat /srv/haproxy/certs/live/EXAMPLE.DOMAIN/fullchain.pem /srv/haproxy/certs/live/EXAMPLE.DOMAIN/privkey.pem > /srv/haproxy/certs/bundle.pem
 ```
