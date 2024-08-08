@@ -1,8 +1,10 @@
-# Detailed Installation Guides
-
- * [Spiral's Local Install Guide](relaytools-setup.md)
-
- * [Tekkadan's VPS Install Guide](relaytools-vps.md)
+```
+▄▄▄  ▄▄▄ .▄▄▌   ▄▄▄·  ▄· ▄▌  ▄▄▄▄▄            ▄▄▌  .▄▄ · 
+▀▄ █·▀▄.▀·██•  ▐█ ▀█ ▐█▪██▌  •██   ▄█▀▄  ▄█▀▄ ██•  ▐█ ▀. 
+▐▀▀▄ ▐▀▀▪▄██ ▪ ▄█▀▀█ ▐█▌▐█▪   ▐█.▪▐█▌.▐▌▐█▌.▐▌██ ▪ ▄▀▀▀█▄
+▐█•█▌▐█▄▄▌▐█▌ ▄▐█▪ ▐▌ ▐█▀·.   ▐█▌·▐█▌.▐▌▐█▌.▐▌▐█▌ ▄▐█▄▪▐█
+.▀  ▀ ▀▀▀ .▀▀▀  ▀  ▀   ▀ • ▀  ▀▀▀  ▀█▄▀▪ ▀█▄▀▪.▀▀▀  ▀▀▀▀ 
+```
 
 # Installation
 ```
@@ -39,13 +41,13 @@ machinectl terminate haproxy
 systemd-nspawn -M keys-certs-manager /bin/bash
 ```
 
->**Change each instance of `YOUR.DOMAIN` to your own domain:**
+>**Change each instance of `YOUR.DOMAIN` (case-insensitive) to your own domain:**
 
 ```
 certbot certonly --config-dir="/srv/haproxy/certs" --work-dir="/srv/haproxy/certs" --logs-dir="/srv/haproxy/certs" --expand -d "YOUR.DOMAIN" -d "RELAY.YOUR.DOMAIN" --agree-tos --register-unsafely-without-email --standalone --preferred-challenges http --non-interactive
 ```
 
->**Change `RELAY.YOUR.DOMAIN` to your relay's subdomain:**
+>**Change `RELAY.YOUR.DOMAIN` (case-insensitive) to your relay's subdomain:**
 
 ```
 cat /srv/haproxy/certs/live/YOUR.DOMAIN/fullchain.pem /srv/haproxy/certs/live/YOUR.DOMAIN/privkey.pem > /srv/haproxy/certs/bundle.pem
