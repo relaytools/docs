@@ -44,15 +44,17 @@ machinectl terminate haproxy
 systemd-nspawn -M keys-certs-manager /bin/bash
 ```
 
->**Change each instance of `YOUR.DOMAIN` (case-insensitive) to your own domain:**
-
+>**Change `YOUR.DOMAIN` to your own domain and `RELAY.YOUR.DOMAIN` to your relay's subdomain:**
+>
+>**These are both case-insensitive.**
 ```
 certbot certonly --config-dir="/srv/haproxy/certs" --work-dir="/srv/haproxy/certs" --logs-dir="/srv/haproxy/certs" --expand -d "YOUR.DOMAIN" -d "RELAY.YOUR.DOMAIN" --agree-tos --register-unsafely-without-email --standalone --preferred-challenges http --non-interactive
 ```
-
->**Change `RELAY.YOUR.DOMAIN` (case-insensitive) to your relay's subdomain:**
-
+>**Change both instances of `YOUR.DOMAIN` (case-insensitive) to your own domain:**
+>
+>**These are both case-insensitive.**
 ```
 cat /srv/haproxy/certs/live/YOUR.DOMAIN/fullchain.pem /srv/haproxy/certs/live/YOUR.DOMAIN/privkey.pem > /srv/haproxy/certs/bundle.pem
 ```
-Type ```exit``` to return to your terminal, and ```reboot```. You have now successfully installed relay.tools :)
+
+- Now type ```exit``` and ```reboot``` to complete your installation of relay.tools :)
