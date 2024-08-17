@@ -35,9 +35,9 @@ reboot
 
 # Relay Creation
 
-- Navigate to your domain in a browser
+- Navigate to your domain in a browser and select the drop-down menu
 - Sign in with Nostr (Authorize with NIP-07 extension)
-- Create a relay from the dropdown menu
+- Create a relay (you can create more later)
 
 # Certificates
 
