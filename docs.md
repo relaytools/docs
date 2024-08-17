@@ -58,7 +58,7 @@ git checkout -b new [branch_name]/main
 
 # Logging in to Live Machines
 
-`Relay.tools` is comprised of many machines! Some include *haproxy, strfry, relaycreator,* and *keys-certs-manager*.
+`Relay.tools` is comprised of 4 machines! *haproxy, strfry, relaycreator,* and *mysql*.
 
 You can sign into them with `machinectl login` to make live changes in production.
 
