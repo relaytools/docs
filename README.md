@@ -47,7 +47,7 @@ systemd-nspawn -M keys-certs-manager /bin/bash
 ```
 certbot certonly --config-dir="/srv/haproxy/certs" --work-dir="/srv/haproxy/certs" --logs-dir="/srv/haproxy/certs" --expand -d "YOUR.DOMAIN" -d "RELAY.YOUR.DOMAIN" --agree-tos --register-unsafely-without-email --standalone --preferred-challenges http --non-interactive
 ```
->**Change both instances of `YOUR.DOMAIN` (case-insensitive) to your own domain:**
+>**Change both instances of `YOUR.DOMAIN` to your own domain:**
 >
 >**These are both case-insensitive.**
 ```
