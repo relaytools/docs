@@ -2,9 +2,7 @@
   <img src="rt.png" />
 </p>
 
-# Detailed Installation Guides
- * [Spiral's Local Install Guide](relaytools-setup.md)
- * [Tekkadan's VPS Install Guide](relaytools-vps.md)
+[Local Install Guide](relaytools-setup.md)
 
 # Installation
 ```
