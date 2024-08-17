@@ -52,7 +52,9 @@ git checkout -b new [branch_name]/main
 
 # Logging in to Live Machines
 
-`Relay.tools` is comprised of many machines! You can sign into them with `machinectl login` to make live changes in production.
+`Relay.tools` is comprised of many machines! Some include *haproxy, strfry, relaycreator,* and *keys-certs-manager*.
+
+You can sign into them with `machinectl login` to make live changes in production.
 
 For example, `machinectl login strfry`.
 
@@ -64,13 +66,12 @@ pass: `creator`
 
 # Viewing the Logs
 
-```
-login strfry
-```
+>In this example, we'll view the `strfry` logs.
+
+- `login strfry`
 - enter `user` and `pass`
-```
-journalctl -u interceptor.service -f
-```
+- `journalctl -u interceptor.service -f`
+
 >**Drop the `-f` to view all logs.**
 
 You can also view the logs of an individual relay!
@@ -91,3 +92,4 @@ cd /srv/relaycreator/
 sudo nano .env
 ```
 - **Change `PAYMENTS_ENABLED=false` to `true`**
+- `machinectl restart relaycreator`
