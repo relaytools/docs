@@ -22,20 +22,26 @@ cd /root/relay-tools-images/machines
 machinectl terminate haproxy
 systemd-nspawn -M keys-certs-manager /bin/bash
 ```
+In this example, we'll add `RELAY2.YOUR.DOMAIN` and `RELAY3.YOUR.DOMAIN`. 
 
->**Replace `YOUR.DOMAIN` to your own domain and `RELAY.YOUR.DOMAIN` to your relay's subdomain:**
+We are just appending an additional `-d "RELAY.YOUR.DOMAIN"` for each relay you wish to certify.
+
+You can add up to 99 relays at this time.
+
+>**Replace `YOUR.DOMAIN` to your own domain.**
 >
->**In this example, we'll add `RELAY2.YOUR.DOMAIN` and `RELAY3.YOUR.DOMAIN`.**
+>**Replace each instance of `RELAY.YOUR.DOMAIN` to your own relays' subdomains.**
 ```
 certbot certonly --config-dir="/srv/haproxy/certs" --work-dir="/srv/haproxy/certs" --logs-dir="/srv/haproxy/certs" --expand -d "YOUR.DOMAIN" -d "RELAY.YOUR.DOMAIN" -d "RELAY2.YOUR.DOMAIN" -d "RELAY3.YOUR.DOMAIN" --agree-tos --register-unsafely-without-email --standalone --preferred-challenges http --non-interactive
 ```
 
->**Change both instances of `YOUR.DOMAIN` to your own domain:**
+>**Change both instances of `YOUR.DOMAIN` to your own domain.**
 ```
 cat /srv/haproxy/certs/live/YOUR.DOMAIN/fullchain.pem /srv/haproxy/certs/live/YOUR.DOMAIN/privkey.pem > /srv/haproxy/certs/bundle.pem
 ```
 
 - Now type ```exit``` and ```reboot```. Your relays should be certified! :)
+>**Remember to always include `YOUR.DOMAIN` and any existing relays when certifying new relays!**
 
 # Git Tracking
 
@@ -43,7 +49,7 @@ cat /srv/haproxy/certs/live/YOUR.DOMAIN/fullchain.pem /srv/haproxy/certs/live/YO
 
 You may wish to fork the `relaycreator` repo and maintain your own branch to update at your leisure.
 
-- Replace `branch_name` and `YOUR.USERNAME` with your own details.
+>**Replace `branch_name` and `YOUR.USERNAME` with your own details.**
 ```
 cd /srv/relaycreator/
 git remote add -f [branch_name] https://github.com/YOUR.USERNAME/relaycreator
@@ -62,27 +68,33 @@ user: `root`
 
 pass: `creator`
 
+>**`exit` will get you back to the login screen.**
+>
 >**NOTE: Press `Ctrl + ]]]` to escape the login screen. You'll want to remember this!**
 
 # Viewing the Logs
 
->In this example, we'll view the `strfry` logs.
+In this example, we'll view the `strfry` logs.
 
 - `login strfry`
 - enter `user` and `pass`
 - `journalctl -u interceptor.service -f`
 
->**Drop the `-f` to view all logs.**
+>**You can drop the `-f` to view all logs.**
+
+Cool, right?
 
 You can also view the logs of an individual relay!
+
+>**Be sure to `exit` the `strfry` machine if you are following along.**
 
 The `relay id` is available in the `url` when visiting the landing page of any relay you have created.
 
 >It should look like `clzqm4zfl005doysgxppib0za`
-```
-login [relay_id]
-journalctl -u interceptor.service -f
-```
+- `login [relay_id]`
+- `journalctl -u interceptor.service -f`
+
+Try publishing a note to your relay if no one is using them yet. You'll see the magic happen in real-time!
 
 # Disable Relay Creation
 
