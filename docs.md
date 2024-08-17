@@ -76,7 +76,7 @@ pass: `creator`
 
 In this example, we'll view the `strfry` logs.
 
-- `login strfry`
+- `machinectl login strfry`
 - enter `user` and `pass`
 - `journalctl -u interceptor.service -f`
 
