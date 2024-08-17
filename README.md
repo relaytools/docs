@@ -2,7 +2,7 @@
   <img src="rt.png" />
 </p>
 
-[Local Install Guide](relaytools-setup.md)
+Welcome to the relay.tools installation guide! If you would like to install relay.tools locally, check out the [Local Install Guide](relaytools-setup.md)!
 
 # Installation
 ```
