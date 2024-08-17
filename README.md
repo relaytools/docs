@@ -10,7 +10,7 @@
 
 If you already have an instance of `relay.tools` set up, you may be looking for the [documentation](docs.md)!
 
-If you would like to install `relay.tools` locally, check out the [Local Install Guide](local-setup.md)!
+If you would like to install `relay.tools` locally, check out the [Local Install Guide](relaytools-setup.md)!
 
 # Installation
 ```
