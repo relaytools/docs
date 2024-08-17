@@ -55,3 +55,7 @@ cat /srv/haproxy/certs/live/YOUR.DOMAIN/fullchain.pem /srv/haproxy/certs/live/YO
 ```
 
 - Now type ```exit``` and ```reboot``` to complete your installation of relay.tools :)
+
+# Now what?
+
+Check out some of the other [documentation](docs.md)!
