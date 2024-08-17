@@ -25,7 +25,7 @@ cd /root/relay-tools-images/machines
 
 # Configuration
 
->**Change `your.domain` to your own domain:**
+>**Change `your.domain` to your own domain.**
 ```
 export MYDOMAIN=your.domain
 ./configure.sh
@@ -38,6 +38,11 @@ reboot
 - Navigate to your domain in a browser and select the drop-down menu
 - Sign in with Nostr (Authorize with NIP-07 extension)
 - Create a relay (you can create more later)
+>**You will need to re-certify each time you create additional relays.**
+>
+>**See the [documentation](docs.md) if you would like to create more than one relay at this time.**
+
+**In this example, we'll create `RELAY.YOUR.DOMAIN`.**
 
 # Certificates
 
@@ -47,13 +52,13 @@ machinectl terminate haproxy
 systemd-nspawn -M keys-certs-manager /bin/bash
 ```
 
->**Change `YOUR.DOMAIN` to your own domain and `RELAY.YOUR.DOMAIN` to your relay's subdomain:**
+>**Change `YOUR.DOMAIN` to your own domain and `RELAY.YOUR.DOMAIN` to your relay's subdomain.**
 >
 >**These are both case-insensitive.**
 ```
 certbot certonly --config-dir="/srv/haproxy/certs" --work-dir="/srv/haproxy/certs" --logs-dir="/srv/haproxy/certs" --expand -d "YOUR.DOMAIN" -d "RELAY.YOUR.DOMAIN" --agree-tos --register-unsafely-without-email --standalone --preferred-challenges http --non-interactive
 ```
->**Change both instances of `YOUR.DOMAIN` to your own domain:**
+>**Change both instances of `YOUR.DOMAIN` to your own domain.**
 >
 >**These are both case-insensitive.**
 ```
