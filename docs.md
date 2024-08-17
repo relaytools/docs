@@ -3,9 +3,9 @@
 Welcome to the extended documentation for `relay.tools`!
 
 - [Creating Additional Relays](#creating-additional-relays)
+- [Git Tracking](#git-tracking)
 - [Logging in to Live Machines](#logging-in-to-live-machines)
 - [Viewing the Logs](#viewing-the-logs)
-- [Git Tracking](#git-tracking)
 - [Disable Relay Creation](#disable-relay-creation)
 
 # Creating Additional Relays
