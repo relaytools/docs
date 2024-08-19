@@ -26,7 +26,7 @@ In this example, we'll add `RELAY2.YOUR.DOMAIN` and `RELAY3.YOUR.DOMAIN`.
 
 We are just appending an additional `-d "RELAY.YOUR.DOMAIN"` for each relay you wish to certify.
 
-You can add up to 99 relays at this time.
+You can add up to 99 relays at this time with certbot. If you choose to handle certifications in another way, you can host as many relays as you like.
 
 >**Replace `YOUR.DOMAIN` to your own domain.**
 >
