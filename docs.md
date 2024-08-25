@@ -28,14 +28,14 @@ We are just appending an additional `-d "RELAY.YOUR.DOMAIN"` for each relay you 
 
 You can add up to 99 relays at this time with certbot. If you choose to handle certifications in another way, you can host as many relays as you like.
 
->**Replace `YOUR.DOMAIN` to your own domain.**
+>**Replace `YOUR.DOMAIN` with your own domain.**
 >
->**Replace each instance of `RELAY.YOUR.DOMAIN` to your own relays' subdomains.**
+>**Replace each instance of `RELAY.YOUR.DOMAIN` with your own relays' subdomains.**
 ```
 certbot certonly --config-dir="/srv/haproxy/certs" --work-dir="/srv/haproxy/certs" --logs-dir="/srv/haproxy/certs" --expand -d "YOUR.DOMAIN" -d "RELAY.YOUR.DOMAIN" -d "RELAY2.YOUR.DOMAIN" -d "RELAY3.YOUR.DOMAIN" --agree-tos --register-unsafely-without-email --standalone --preferred-challenges http --non-interactive
 ```
 
->**Change both instances of `YOUR.DOMAIN` to your own domain.**
+>**Replace both instances of `YOUR.DOMAIN` with your own domain.**
 ```
 cat /srv/haproxy/certs/live/YOUR.DOMAIN/fullchain.pem /srv/haproxy/certs/live/YOUR.DOMAIN/privkey.pem > /srv/haproxy/certs/bundle.pem
 ```
