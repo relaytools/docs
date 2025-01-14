@@ -15,7 +15,7 @@ If you would like to install `relay.tools` locally, check out the [Local Install
 # Installation
 ```
 git clone https://github.com/relaytools/relay-tools-images.git
-cd /root/relay-tools-images/machines
+cd relay-tools-images/machines
 ./prereqs.sh
 ./build
 ```
