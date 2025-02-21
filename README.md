@@ -35,7 +35,22 @@ reboot
 
 # Relay Creation
 
-- Navigate to your domain in a browser and select the drop-down menu
-- Sign in with Nostr (Authorize with NIP-07 extension)
+- Navigate to your domain in a browser and authorize with NIP-07 extension
+
+<p align="center">
+  <img src="images/signin.png" />
+</p>
+
+- Select 'create relay' from the drop-down menu
+
+<p align="center">
+  <img src="images/createrelay.png" />
+</p>
+
 - Create some relays!
+
+<p align="center">
+  <img src="images/relaycreation.png" />
+</p>
+
 - Feel free to check out some of the other [documentation](docs.md)!
