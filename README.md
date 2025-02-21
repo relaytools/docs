@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="rt.png" />
+  <img src="images/rt.png" />
 </p>
 <br>
 
@@ -10,7 +10,7 @@
 
 If you already have an instance of `relay.tools` set up, you may be looking for the [documentation](docs.md)!
 
-If you would like to install `relay.tools` locally, check out the [Local Install Guide](relaytools-setup.md)!
+If you would like to install `relay.tools` locally, check out the [local install guide](relaytools-setup.md)!
 
 # Installation
 ```
@@ -35,7 +35,22 @@ reboot
 
 # Relay Creation
 
-- Navigate to your domain in a browser and select the drop-down menu
-- Sign in with Nostr (Authorize with NIP-07 extension)
+- Navigate to your domain in a browser and authorize with NIP-07 extension
+
+<p align="center">
+  <img src="images/signin.png" />
+</p>
+
+- Select 'create relay' from the drop-down menu
+
+<p align="center">
+  <img src="images/createrelay.png" />
+</p>
+
 - Create some relays!
+
+<p align="center">
+  <img src="images/relaycreation.png" />
+</p>
+
 - Feel free to check out some of the other [documentation](docs.md)!
