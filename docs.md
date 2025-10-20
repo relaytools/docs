@@ -24,15 +24,13 @@ git checkout -b new [branch_name]/main
 
 `Relay.tools` is comprised of 4 machines! *haproxy, strfry, relaycreator,* and *mysql*.
 
-You can sign into them with `machinectl login` to make live changes in production.
+Machines are what systemd-nspawn calls containers.  They are separated from the host system and can be upgraded or changed using machine images.
 
-For example, `machinectl login strfry`.
+You can change shell into them with `machinectl shell` to make live changes in production.
 
-user: `root`
+For example, `machinectl shell strfry`.
 
-pass: `creator`
-
->**`exit` will get you back to the login screen.**
+>**`exit or CTRL+D` will exit the shell back into the host machine.**
 >
 >**NOTE: Press `Ctrl + ]]]` to escape the login screen. You'll want to remember this!**
 
@@ -40,11 +38,10 @@ pass: `creator`
 
 In this example, we'll view the `strfry` logs.
 
-- `machinectl login strfry`
-- enter `user` and `pass`
+- `machinectl shell strfry`
 - `journalctl -u interceptor.service -f`
 
->**You can drop the `-f` to view all logs.**
+>**You can drop the `-u interceptor.service` to view all logs for this container.**
 
 Cool, right?
 
@@ -68,4 +65,5 @@ cd /srv/relaycreator/
 sudo nano .env
 ```
 - **Change `PAYMENTS_ENABLED=false` to `true`**
-- `machinectl restart relaycreator`
+- `machinectl terminate relaycreator`
+- `machinectl start relaycreator`
