@@ -10,8 +10,6 @@
 
 If you already have an instance of `relay.tools` set up, you may be looking for the [documentation](docs.md)!
 
-If you would like to install `relay.tools` locally, check out the [Local Install Guide](relaytools-setup.md)!
-
 # Installation
 ```
 git clone https://github.com/relaytools/relay-tools-images.git
@@ -43,3 +41,6 @@ reboot
 - Sign in with Nostr (Authorize with NIP-07 extension)
 - Create some relays!
 - Feel free to check out some of the other [documentation](docs.md)!
+
+# Other docs
+Spiral's guide to `relay.tools` locally, [Local Install Guide](relaytools-setup.md)!
