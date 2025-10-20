@@ -25,6 +25,10 @@ cd relay-tools-images/machines
 
 # Configuration
 
+## Pre-requisites.
+- You must have configured a domain to point to this IP address, preferrably with a wildcard DNS address.
+- Eg *.example.com -> your IP
+
 >**Change `your.domain` to your own domain.**
 ```
 export MYDOMAIN=your.domain
