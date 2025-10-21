@@ -35,6 +35,21 @@ machinectl enable mysql && machinectl enable strfry && machinectl enable relaycr
 reboot
 ```
 
+## Troubleshooting
+If the configuration step fails, typically it's because DNS was not set.  Currently, re-running configure does not help.  To try again, we need to wipe the installation and rebuild/configure.
+
+First, remove our persistent data storage so we can start fresh:
+```
+rm -rf /srv/*
+```
+
+In the relay-tools-images/machines directory:
+```
+./clean
+./build
+```
+After re-building, try the configure.sh script again and it should succeed.
+
 # Relay Creation
 
 - Navigate to your domain in a browser and select the drop-down menu
